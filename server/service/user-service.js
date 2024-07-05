@@ -1,9 +1,12 @@
 import bcrypt from "bcrypt";
 import { v4 as uuid } from "uuid";
+import dotenv from "dotenv";
 
 import UserModel from "../models/user-model.js";
 import mailService from "./mail-service.js";
 import tokenService from "./token-service.js";
+
+dotenv.config();
 
 class UserService {
   async registration(email, password) {
@@ -20,13 +23,15 @@ class UserService {
       activationLink,
     });
 
-    await mailService.sendActivationLink(email, activationLink);
+    await mailService.sendActivationLink(
+      email,
+      `${process.env.BASE_URL}/jwt-auth/activate/${activationLink}`
+    );
 
     const { _id: id, isActivated } = user;
 
     const tokens = tokenService.generateTokens({ id, email, isActivated });
     await tokenService.saveToken(id, tokens.refreshToken);
-
     return {
       ...tokens,
       user: {

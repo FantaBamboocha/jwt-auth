@@ -11,7 +11,9 @@ class UserController {
         httpOnly: true,
       });
       return res.json(userData);
-    } catch (error) {}
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
   }
 
   async login(req, res, next) {

@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
 import TokenModel from "../models/token-model.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 class TokenService {
   generateTokens(payload) {
@@ -20,6 +22,7 @@ class TokenService {
       return tokenData.save();
     }
     const token = await TokenModel.create({ user: userId, refreshToken });
+
     return token;
   }
 }
