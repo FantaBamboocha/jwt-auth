@@ -1,4 +1,7 @@
+import dotenv from "dotenv";
 import userService from "../service/user-service.js";
+
+dotenv.config();
 
 class UserController {
   async registration(req, res, next) {
@@ -28,7 +31,14 @@ class UserController {
 
   async activate(req, res, next) {
     try {
-    } catch (error) {}
+      const activationLink = req.params.link;
+
+      await userService.activate(activationLink);
+
+      return res.redirect(process.env.CLIENT_URL);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async getUsers(req, res, next) {

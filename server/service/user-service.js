@@ -25,7 +25,7 @@ class UserService {
 
     await mailService.sendActivationLink(
       email,
-      `${process.env.BASE_URL}/jwt-auth/activate/${activationLink}`
+      `${process.env.API_URL}/jwt-auth/activate/${activationLink}`
     );
 
     const { _id: id, isActivated } = user;
@@ -40,6 +40,17 @@ class UserService {
         isActivated,
       },
     };
+  }
+
+  async activate(activationLink) {
+    const user = await UserModel.findOne({ activationLink });
+    if (!user) {
+      throw new Error("Activation link is invalid");
+    }
+
+    user.isActivated = true;
+    console.log(user);
+    await user.save();
   }
 }
 
