@@ -52,6 +52,38 @@ class UserService {
     console.log(user);
     await user.save();
   }
+
+  async login(email, password) {
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+      throw new Error(`User with email ${email} not found`);
+    }
+
+    const isPassEquals = await bcrypt.compare(password, user.password);
+    if (!isPassEquals) {
+      throw new Error("Invalid password");
+    }
+
+    const { _id: id, isActivated } = user;
+
+    const tokens = tokenService.generateTokens({ id, email, isActivated });
+    await tokenService.saveToken(id, tokens.refreshToken);
+
+    return {
+      ...tokens,
+      user: {
+        id,
+        email,
+        isActivated,
+      },
+    };
+  }
+
+  async logout(refreshToken) {
+    const token = await tokenService.removeToken(refreshToken);
+    return token;
+  }
 }
 
 export default new UserService();

@@ -25,6 +25,12 @@ class TokenService {
 
     return token;
   }
+
+  async removeToken(refreshToken) {
+    const token = await TokenModel.deleteOne({ refreshToken });
+    console.log("token service", token);
+    return token;
+  }
 }
 
 export default new TokenService();
