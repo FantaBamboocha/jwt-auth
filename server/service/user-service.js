@@ -87,19 +87,19 @@ class UserService {
   }
 
   async refresh(refreshToken) {
-    // if (!refreshToken) {
-    //   throw new Error("Refresh token is not valid");
-    // }
-
+    if (!refreshToken) {
+      throw new Error("Refresh token is not valid");
+    }
     const userData = tokenService.validateRefreshToken(refreshToken);
     const tokenFromDb = await tokenService.findToken(refreshToken);
 
     if (!userData || !tokenFromDb) {
+      // if (!userData) {
       throw new Error("Refresh token is not valid");
     }
 
     const user = await UserModel.findById(userData.id);
-    const { _id: id, isActivated } = user;
+    const { _id: id, email, isActivated } = user;
     const tokens = tokenService.generateTokens({ id, email, isActivated });
 
     await tokenService.saveToken(id, tokens.refreshToken);

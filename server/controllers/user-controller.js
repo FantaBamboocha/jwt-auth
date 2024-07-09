@@ -66,7 +66,11 @@ class UserController {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
-    } catch (error) {}
+
+      return res.json(userData);
+    } catch (error) {
+      res.status(401).json({ message: error.message });
+    }
   }
 
   async getUsers(req, res, next) {
