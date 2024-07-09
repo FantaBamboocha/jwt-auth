@@ -32,6 +32,7 @@ class UserService {
 
     const tokens = tokenService.generateTokens({ id, email, isActivated });
     await tokenService.saveToken(id, tokens.refreshToken);
+
     return {
       ...tokens,
       user: {
@@ -49,7 +50,6 @@ class UserService {
     }
 
     user.isActivated = true;
-    console.log(user);
     await user.save();
   }
 
@@ -82,7 +82,42 @@ class UserService {
 
   async logout(refreshToken) {
     const token = await tokenService.removeToken(refreshToken);
+
     return token;
+  }
+
+  async refresh(refreshToken) {
+    // if (!refreshToken) {
+    //   throw new Error("Refresh token is not valid");
+    // }
+
+    const userData = tokenService.validateRefreshToken(refreshToken);
+    const tokenFromDb = await tokenService.findToken(refreshToken);
+
+    if (!userData || !tokenFromDb) {
+      throw new Error("Refresh token is not valid");
+    }
+
+    const user = await UserModel.findById(userData.id);
+    const { _id: id, isActivated } = user;
+    const tokens = tokenService.generateTokens({ id, email, isActivated });
+
+    await tokenService.saveToken(id, tokens.refreshToken);
+
+    return {
+      ...tokens,
+      user: {
+        id,
+        email,
+        isActivated,
+      },
+    };
+  }
+
+  async getUsers() {
+    const users = await UserModel.find();
+
+    return users;
   }
 }
 
