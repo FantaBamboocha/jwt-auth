@@ -4,7 +4,7 @@ import userService from "../service/user-service.js";
 dotenv.config();
 
 class UserController {
-  async registration(req, res, next) {
+  async registration(req, res) {
     try {
       const { email, password } = req.body;
       const userData = await userService.registration(email, password);
@@ -12,6 +12,8 @@ class UserController {
       res.cookie("refreshToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
+        secure: false,
+        sameSite: "Lax",
       });
       return res.json(userData);
     } catch (error) {
@@ -19,23 +21,28 @@ class UserController {
     }
   }
 
-  async login(req, res, next) {
+  async login(req, res) {
     try {
+      const cookies = req.cookies;
+      console.log(cookies);
       const { email, password } = req.body;
       const userData = await userService.login(email, password);
 
       res.cookie("refreshToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
-        httpOnly: true,
+        httpOnly: false,
+        sameSite: "Lax",
+        secure: false,
       });
 
       return res.json(userData);
     } catch (error) {
-      res.status(400).json({ message: error.message });
+      console.log(error);
+      res.status(400).json(error);
     }
   }
 
-  async logout(req, res, next) {
+  async logout(req, res) {
     try {
       const { refreshToken } = req.cookies;
       const token = await userService.logout(refreshToken);
@@ -46,7 +53,7 @@ class UserController {
     } catch (error) {}
   }
 
-  async activate(req, res, next) {
+  async activate(req, res) {
     try {
       const activationLink = req.params.link;
 
@@ -58,13 +65,16 @@ class UserController {
     }
   }
 
-  async refresh(req, res, next) {
+  async refresh(req, res) {
     try {
+      // console.log(req.cookies);
       const { refreshToken } = req.cookies;
       const userData = await userService.refresh(refreshToken);
       res.cookie("refreshToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
-        httpOnly: true,
+        httpOnly: false,
+        secure: false,
+        sameSite: "Lax",
       });
 
       return res.json(userData);
@@ -73,7 +83,7 @@ class UserController {
     }
   }
 
-  async getUsers(req, res, next) {
+  async getUsers(req, res) {
     try {
       const users = await userService.getUsers();
       return res.json(users);
