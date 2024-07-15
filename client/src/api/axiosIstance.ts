@@ -5,6 +5,9 @@ export const BASE_URL = "http://localhost:5000/jwt-auth";
 const axiosIstance = axios.create({
   withCredentials: true,
   baseURL: BASE_URL,
+  headers: {
+    lol: document.cookie,
+  },
 });
 
 axiosIstance.interceptors.request.use((config) => {

@@ -4,6 +4,7 @@ import { IUser } from "#types/responses/IUser";
 import login from "@store/thunk/login";
 import registration from "@store/thunk/registration";
 import logout from "@store/thunk/logout";
+import checkAuth from "@store/thunk/checkAuth";
 
 const initialState = {
   user: {} as IUser,
@@ -28,6 +29,11 @@ const authSlice = createSlice({
     builder.addCase(logout.fulfilled, (state) => {
       state.isAuth = false;
       state.user = {} as IUser;
+    });
+
+    builder.addCase(checkAuth.fulfilled, (state, action) => {
+      state.isAuth = true;
+      state.user = action.payload.user;
     });
   },
 });
