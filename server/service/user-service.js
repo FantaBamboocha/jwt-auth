@@ -60,6 +60,10 @@ class UserService {
       throw new Error(`User with email ${email} not found`);
     }
 
+    if (!user.isActivated) {
+      throw new Error("User is not activated");
+    }
+
     const isPassEquals = await bcrypt.compare(password, user.password);
     if (!isPassEquals) {
       throw new Error("Invalid password");
@@ -91,9 +95,8 @@ class UserService {
       throw new Error("Refresh token is not valid");
     }
     const userData = tokenService.validateRefreshToken(refreshToken);
-    const tokenFromDb = await tokenService.findToken(refreshToken);
+    // const tokenFromDb = await tokenService.findToken(refreshToken);
 
-    // if (!userData || !tokenFromDb) {
     if (!userData) {
       throw new Error("Refresh token is not valid");
     }

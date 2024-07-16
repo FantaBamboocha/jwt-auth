@@ -28,6 +28,7 @@ class TokenService {
 
   async removeToken(refreshToken) {
     const token = await TokenModel.deleteOne({ refreshToken });
+
     return token;
   }
 
@@ -53,6 +54,7 @@ class TokenService {
 
   async findToken(refreshToken) {
     const tokenData = await TokenModel.findOne({ refreshToken });
+
     return tokenData;
   }
 }

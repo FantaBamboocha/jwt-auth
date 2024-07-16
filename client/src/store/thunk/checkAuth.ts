@@ -8,7 +8,6 @@ const checkAuth = createAsyncThunk<IAuthResponse>(
   "auth/checkAuth",
   async () => {
     try {
-      console.log("cookie:", document.cookie);
       const response = await axios.get(`${BASE_URL}/refresh`, {
         withCredentials: true,
       });

@@ -1,2 +1,6 @@
 node_modules
 .env
+
+# Ignore SSL key and certificate
+localhost+1-key.pem
+localhost+1.pem

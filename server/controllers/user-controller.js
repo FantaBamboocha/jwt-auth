@@ -9,12 +9,12 @@ class UserController {
       const { email, password } = req.body;
       const userData = await userService.registration(email, password);
 
-      res.cookie("refreshToken", userData.refreshToken, {
-        maxAge: 30 * 24 * 60 * 60 * 1000,
-        httpOnly: true,
-        secure: false,
-        sameSite: "Lax",
-      });
+      // res.cookie("refreshToken", userData.refreshToken, {
+      //   maxAge: 30 * 24 * 60 * 60 * 1000,
+      //   httpOnly: true,
+      //   secure: true,
+      //   sameSite: "None",
+      // });
       return res.json(userData);
     } catch (error) {
       res.status(400).json({ message: error.message });
@@ -23,16 +23,14 @@ class UserController {
 
   async login(req, res) {
     try {
-      const cookies = req.cookies;
-      console.log(cookies);
       const { email, password } = req.body;
       const userData = await userService.login(email, password);
 
       res.cookie("refreshToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: false,
-        sameSite: "Lax",
-        secure: false,
+        secure: true,
+        sameSite: "None",
       });
 
       return res.json(userData);
@@ -67,14 +65,14 @@ class UserController {
 
   async refresh(req, res) {
     try {
-      // console.log(req.cookies);
       const { refreshToken } = req.cookies;
       const userData = await userService.refresh(refreshToken);
+
       res.cookie("refreshToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: false,
-        secure: false,
-        sameSite: "Lax",
+        secure: true,
+        sameSite: "None",
       });
 
       return res.json(userData);

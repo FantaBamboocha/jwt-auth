@@ -12,8 +12,7 @@ const PORT = process.env.PORT;
 const app = express();
 
 const corsOptions = {
-  // origin: process.env.CLIENT_URL,
-  origin: "http://127.0.0.1:5173",
+  origin: process.env.CLIENT_URL,
   credentials: true,
 };
 
@@ -23,8 +22,8 @@ app.use(cors(corsOptions));
 app.use("/jwt-auth", router);
 
 const options = {
-  key: fs.readFileSync("server.key"),
-  cert: fs.readFileSync("server.cert"),
+  key: fs.readFileSync("localhost+1-key.pem"),
+  cert: fs.readFileSync("localhost+1.pem"),
 };
 
 const start = async () => {

@@ -8,7 +8,6 @@ const registration = createAsyncThunk<
   { email: string; password: string }
 >("auth/registration", async ({ email, password }) => {
   const response = await authAPI.registration(email, password);
-  console.log(response.data);
 
   return response.data;
 });

@@ -6,7 +6,6 @@ import registration from "@store/thunk/registration";
 import logout from "@store/thunk/logout";
 import { useSelector } from "react-redux";
 import checkAuth from "@store/thunk/checkAuth";
-import axios from "axios";
 
 const LoginForm: FC = () => {
   const [email, setEmail] = useState("");
@@ -15,26 +14,15 @@ const LoginForm: FC = () => {
   const { isAuth, user } = useSelector((state: RootState) => state.auth);
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    if (localStorage.getItem("token")) dispatch(checkAuth());
+  }, []);
+
   const handleCheck = () => {
     dispatch(checkAuth());
   };
 
   const handleLogin = async () => {
-    // const response = await axios.post(
-    //   "http://localhost:5000/jwt-auth/login",
-    //   {
-    //     email,
-    //     password,
-    //   },
-    //   {
-    //     withCredentials: true,
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //     },
-    //   }
-    // );
-    // console.log(response.data);
     dispatch(login({ email, password }));
   };
 
@@ -52,7 +40,6 @@ const LoginForm: FC = () => {
         <>
           <h2>{user.email}</h2>
           <button onClick={handleLogout}>Logout</button>
-          <button onClick={handleCheck}>Check</button>
         </>
       )}
       {!isAuth && (

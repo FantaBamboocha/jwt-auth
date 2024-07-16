@@ -10,7 +10,7 @@ const localStorageMiddleware: Middleware = (store) => {
     return (action: any) => {
       if (
         action.type === login.fulfilled.type ||
-        action.type === registration.fulfilled.type ||
+        // action.type === registration.fulfilled.type ||
         action.type === checkAuth.fulfilled.type
       ) {
         localStorage.setItem("token", action.payload.accessToken);

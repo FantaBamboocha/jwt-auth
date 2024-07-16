@@ -9,6 +9,7 @@ import checkAuth from "@store/thunk/checkAuth";
 const initialState = {
   user: {} as IUser,
   isAuth: false,
+  isActivated: false,
 };
 
 const authSlice = createSlice({
@@ -21,10 +22,10 @@ const authSlice = createSlice({
       state.user = action.payload.user;
     });
 
-    builder.addCase(registration.fulfilled, (state, action) => {
-      state.isAuth = true;
-      state.user = action.payload.user;
-    });
+    // builder.addCase(registration.fulfilled, (state, action) => {
+    //   state.isAuth = true;
+    //   state.user = action.payload.user;
+    // });
 
     builder.addCase(logout.fulfilled, (state) => {
       state.isAuth = false;
