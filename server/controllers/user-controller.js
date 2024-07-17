@@ -6,8 +6,13 @@ dotenv.config();
 class UserController {
   async registration(req, res) {
     try {
-      const { email, password } = req.body;
-      const userData = await userService.registration(email, password);
+      console.log(req.body);
+      const { firstName, email, password } = req.body;
+      const userData = await userService.registration(
+        firstName,
+        email,
+        password
+      );
 
       // res.cookie("refreshToken", userData.refreshToken, {
       //   maxAge: 30 * 24 * 60 * 60 * 1000,

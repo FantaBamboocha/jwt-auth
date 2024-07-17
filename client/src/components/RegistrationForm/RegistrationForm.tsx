@@ -2,8 +2,11 @@ import { Formik, Form, useFormik } from "formik";
 import { Button, Box, TextField } from "@mui/material";
 
 import { registrationValidationSchema } from "../../utils/validationSchema";
+import { useAppDispatch } from "@store/store";
+import registration from "@store/thunk/registration";
 
 const RegistrationForm = () => {
+  const dispatch = useAppDispatch();
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -12,8 +15,8 @@ const RegistrationForm = () => {
       confirmPassword: "",
     },
     validationSchema: registrationValidationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values));
+    onSubmit: ({ firstName, email, password }) => {
+      dispatch(registration({ firstName, email, password }));
     },
   });
 
@@ -72,7 +75,7 @@ const RegistrationForm = () => {
         fullWidth
         onClick={formik.handleSubmit}
       >
-        Submit
+        Create
       </Button>
     </Box>
   );

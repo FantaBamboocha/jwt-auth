@@ -15,10 +15,12 @@ const authAPI = {
   },
 
   registration: async (
+    firstName: string,
     email: string,
     password: string
   ): Promise<AxiosResponse<IAuthResponse>> => {
     return await axiosIstance.post<IAuthResponse>("/registration", {
+      firstName,
       email,
       password,
     });

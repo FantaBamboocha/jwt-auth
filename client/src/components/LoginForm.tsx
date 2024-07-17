@@ -18,10 +18,6 @@ const LoginForm: FC = () => {
     if (localStorage.getItem("token")) dispatch(checkAuth());
   }, []);
 
-  const handleCheck = () => {
-    dispatch(checkAuth());
-  };
-
   const handleLogin = async () => {
     dispatch(login({ email, password }));
   };

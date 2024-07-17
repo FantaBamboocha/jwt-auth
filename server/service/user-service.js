@@ -9,7 +9,7 @@ import tokenService from "./token-service.js";
 dotenv.config();
 
 class UserService {
-  async registration(email, password) {
+  async registration(firstName, email, password) {
     const candidate = await UserModel.findOne({ email });
     if (candidate) {
       throw new Error(`User with email ${email} already exists`);
@@ -18,6 +18,7 @@ class UserService {
     const hashPassword = await bcrypt.hash(password, 3);
     const activationLink = uuid();
     const user = await UserModel.create({
+      firstName,
       email,
       password: hashPassword,
       activationLink,
@@ -30,13 +31,19 @@ class UserService {
 
     const { _id: id, isActivated } = user;
 
-    const tokens = tokenService.generateTokens({ id, email, isActivated });
+    const tokens = tokenService.generateTokens({
+      id,
+      firstName,
+      email,
+      isActivated,
+    });
     await tokenService.saveToken(id, tokens.refreshToken);
 
     return {
       ...tokens,
       user: {
         id,
+        firstName,
         email,
         isActivated,
       },
@@ -69,15 +76,21 @@ class UserService {
       throw new Error("Invalid password");
     }
 
-    const { _id: id, isActivated } = user;
+    const { _id: id, firstName, isActivated } = user;
 
-    const tokens = tokenService.generateTokens({ id, email, isActivated });
+    const tokens = tokenService.generateTokens({
+      id,
+      firstName,
+      email,
+      isActivated,
+    });
     await tokenService.saveToken(id, tokens.refreshToken);
 
     return {
       ...tokens,
       user: {
         id,
+        firstName,
         email,
         isActivated,
       },
@@ -103,7 +116,12 @@ class UserService {
 
     const user = await UserModel.findById(userData.id);
     const { _id: id, email, isActivated } = user;
-    const tokens = tokenService.generateTokens({ id, email, isActivated });
+    const tokens = tokenService.generateTokens({
+      id,
+      firstName,
+      email,
+      isActivated,
+    });
 
     await tokenService.saveToken(id, tokens.refreshToken);
 
@@ -111,6 +129,7 @@ class UserService {
       ...tokens,
       user: {
         id,
+        firstName,
         email,
         isActivated,
       },
