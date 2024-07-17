@@ -10,6 +10,7 @@ const initialState = {
   user: {} as IUser,
   isAuth: false,
   isActivated: false,
+  users: [],
 };
 
 const authSlice = createSlice({
