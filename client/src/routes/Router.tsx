@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { routeNames } from "./routeNames";
-import LoginForm from "@components/LoginForm/LoginForm";
-import RegistrationForm from "@components/RegistrationForm/RegistrationForm";
+import LoginFormContainer from "@components/LoginForm/containers/LoginFormContainer";
 import PrivateRoute from "@components/PrivateRoute";
 import HomePage from "@pages/HomePage/HomePage";
+import RegistrationFormContainer from "@components/RegistrationForm/containers/RegistrationFormContainer";
 
 const Router = () => {
   return (
@@ -18,8 +18,11 @@ const Router = () => {
             </PrivateRoute>
           }
         />
-        <Route path={routeNames.LOGIN} element={<LoginForm />} />
-        <Route path={routeNames.REGISTRATION} element={<RegistrationForm />} />
+        <Route path={routeNames.LOGIN} element={<LoginFormContainer />} />
+        <Route
+          path={routeNames.REGISTRATION}
+          element={<RegistrationFormContainer />}
+        />
       </Routes>
     </BrowserRouter>
   );

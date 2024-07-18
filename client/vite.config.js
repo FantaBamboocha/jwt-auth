@@ -11,6 +11,7 @@ export default defineConfig({
       "@pages": "/src/pages",
       "@store": "/src/store",
       "#types": "/src/types",
+      "@utils": "/src/utils",
     },
   },
   server: {
