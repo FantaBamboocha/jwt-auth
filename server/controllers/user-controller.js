@@ -6,7 +6,6 @@ dotenv.config();
 class UserController {
   async registration(req, res) {
     try {
-      console.log(req.body);
       const { firstName, email, password } = req.body;
       const userData = await userService.registration(
         firstName,

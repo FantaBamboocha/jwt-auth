@@ -12,11 +12,13 @@ class MailService {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASSWORD,
       },
+      tls: {
+        ciphers: "SSLv3",
+      },
     });
   }
 
   async sendActivationLink(to, link) {
-    console.log(link);
     try {
       await this.transporter.sendMail({
         from: process.env.SMTP_USER,

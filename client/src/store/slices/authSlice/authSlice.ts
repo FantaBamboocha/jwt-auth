@@ -10,7 +10,7 @@ const initialState = {
   user: {} as IUser,
   isAuth: false,
   isActivated: false,
-  users: [],
+  isLoading: false,
 };
 
 const authSlice = createSlice({
@@ -18,9 +18,30 @@ const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(login.pending, (state) => {
+      state.isLoading = true;
+    });
+
     builder.addCase(login.fulfilled, (state, action) => {
+      state.isLoading = false;
       state.isAuth = true;
       state.user = action.payload.user;
+    });
+
+    builder.addCase(login.rejected, (state) => {
+      state.isLoading = false;
+    });
+
+    builder.addCase(registration.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(registration.fulfilled, (state) => {
+      state.isLoading = false;
+    });
+
+    builder.addCase(registration.rejected, (state) => {
+      state.isLoading = false;
     });
 
     // builder.addCase(registration.fulfilled, (state, action) => {

@@ -1,8 +1,6 @@
 import { Box, Container } from "@mui/material";
 
-import Login from "@components/LoginForm";
-import LoginForm from "@components/LoginForm/LoginForm";
-import RegistrationForm from "@components/RegistrationForm/RegistrationForm";
+import Router from "./routes/Router";
 
 function App() {
   return (
@@ -12,12 +10,10 @@ function App() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          height: "100vh",
+          height: "90vh",
         }}
       >
-        {/* <Login /> */}
-        <LoginForm />
-        <RegistrationForm />
+        <Router />
       </Box>
     </Container>
   );
