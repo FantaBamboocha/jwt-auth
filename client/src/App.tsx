@@ -1,6 +1,7 @@
 import { Box, Container } from "@mui/material";
 
 import Router from "./routes/Router";
+import Notification from "@components/Notification";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         }}
       >
         <Router />
+        <Notification />
       </Box>
     </Container>
   );

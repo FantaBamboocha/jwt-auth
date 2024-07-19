@@ -13,12 +13,6 @@ class UserController {
         password
       );
 
-      // res.cookie("refreshToken", userData.refreshToken, {
-      //   maxAge: 30 * 24 * 60 * 60 * 1000,
-      //   httpOnly: true,
-      //   secure: true,
-      //   sameSite: "None",
-      // });
       return res.json(userData);
     } catch (error) {
       res.status(400).json({ message: error.message });
@@ -39,8 +33,7 @@ class UserController {
 
       return res.json(userData);
     } catch (error) {
-      console.log(error);
-      res.status(400).json(error);
+      res.status(400).json({ message: error.message });
     }
   }
 

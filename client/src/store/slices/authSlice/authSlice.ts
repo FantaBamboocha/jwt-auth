@@ -6,7 +6,14 @@ import registration from "@store/thunk/registration";
 import logout from "@store/thunk/logout";
 import checkAuth from "@store/thunk/checkAuth";
 
-const initialState = {
+export interface IAuthState {
+  user: IUser;
+  isAuth: boolean;
+  isActivated: boolean;
+  isLoading: boolean;
+}
+
+const initialState: IAuthState = {
   user: {} as IUser,
   isAuth: false,
   isActivated: false,
@@ -28,7 +35,7 @@ const authSlice = createSlice({
       state.user = action.payload.user;
     });
 
-    builder.addCase(login.rejected, (state) => {
+    builder.addCase(login.rejected, (state, action) => {
       state.isLoading = false;
     });
 
@@ -40,14 +47,9 @@ const authSlice = createSlice({
       state.isLoading = false;
     });
 
-    builder.addCase(registration.rejected, (state) => {
+    builder.addCase(registration.rejected, (state, action) => {
       state.isLoading = false;
     });
-
-    // builder.addCase(registration.fulfilled, (state, action) => {
-    //   state.isAuth = true;
-    //   state.user = action.payload.user;
-    // });
 
     builder.addCase(logout.fulfilled, (state) => {
       state.isAuth = false;

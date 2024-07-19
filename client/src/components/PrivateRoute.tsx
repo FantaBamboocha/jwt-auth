@@ -8,7 +8,6 @@ import checkAuth from "@store/thunk/checkAuth";
 
 const PrivateRoute: FC<{ children: ReactNode }> = ({ children }) => {
   const isAuth = useSelector(isAuthSelector);
-  console.log(isAuth);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

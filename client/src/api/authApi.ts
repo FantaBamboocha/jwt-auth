@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 
 import axiosIstance from "./axiosIstance";
 import { IAuthResponse } from "#types/responses/AuthResponse";

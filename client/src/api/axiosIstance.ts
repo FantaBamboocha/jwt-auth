@@ -13,9 +13,11 @@ axiosIstance.interceptors.request.use((config) => {
   return config;
 });
 
-axiosIstance.interceptors.response.use(
-  (config) => config,
-  (err) => {}
-);
+// axiosIstance.interceptors.response.use(
+//   (config) => config,
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
 
 export default axiosIstance;

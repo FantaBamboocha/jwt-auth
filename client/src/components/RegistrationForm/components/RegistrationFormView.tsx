@@ -1,10 +1,7 @@
 import { FC } from "react";
-import { Box, Paper, Typography } from "@mui/material";
 
 import { IFormViewProps } from "#types/formikTypes/formViewProps";
-import TextFieldWrapper from "@components/TextFieldWrapper";
-import SubmitButton from "@components/SubmitButton";
-import LinkBlockContainer from "@components/LinkBlock/containers/LinkBlockContainer";
+import CommonFormView from "@components/CommonFormView";
 
 const RegistrationFormView: FC<IFormViewProps> = ({ isLoading, formik }) => {
   const fields = [
@@ -14,30 +11,13 @@ const RegistrationFormView: FC<IFormViewProps> = ({ isLoading, formik }) => {
     { name: "confirmPassword", type: "password", label: "Confirm Password" },
   ];
   return (
-    <Box>
-      <Paper
-        component="form"
-        onSubmit={formik.handleSubmit}
-        sx={{ p: 4, mb: 3 }}
-      >
-        <Box mb={2} sx={{ textAlign: "center" }}>
-          <Typography variant="h5">Create an account</Typography>
-        </Box>
-
-        {fields.map(({ name, type, label }) => (
-          <TextFieldWrapper
-            key={label}
-            name={name}
-            type={type}
-            label={label}
-            formik={formik}
-          />
-        ))}
-
-        <SubmitButton isLoading={isLoading} text="Sign Up" />
-      </Paper>
-      <LinkBlockContainer />
-    </Box>
+    <CommonFormView
+      title="Create an account"
+      isLoading={isLoading}
+      formik={formik}
+      fields={fields}
+      submitButtonText="Sign Up"
+    />
   );
 };
 
