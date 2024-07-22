@@ -24,10 +24,10 @@ class UserService {
       activationLink,
     });
 
-    // await mailService.sendActivationLink(
-    //   email,
-    //   `${process.env.API_URL}/jwt-auth/activate/${activationLink}`
-    // );
+    await mailService.sendActivationLink(
+      email,
+      `${process.env.API_URL}/jwt-auth/activate/${activationLink}`
+    );
 
     const { _id: id, isActivated } = user;
 
@@ -67,9 +67,9 @@ class UserService {
       throw new Error(`User with email ${email} not found`);
     }
 
-    // if (!user.isActivated) {
-    //   throw new Error("User is not activated");
-    // }
+    if (!user.isActivated) {
+      throw new Error("User is not activated. Check your email");
+    }
 
     const isPassEquals = await bcrypt.compare(password, user.password);
     if (!isPassEquals) {

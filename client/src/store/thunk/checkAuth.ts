@@ -6,7 +6,7 @@ import { BASE_URL } from "@api/axiosIstance";
 
 const checkAuth = createAsyncThunk<IAuthResponse>(
   "auth/checkAuth",
-  async () => {
+  async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(`${BASE_URL}/refresh`, {
         withCredentials: true,
@@ -14,7 +14,7 @@ const checkAuth = createAsyncThunk<IAuthResponse>(
 
       return response.data;
     } catch (err) {
-      console.error(err);
+      rejectWithValue(err);
     }
   }
 );

@@ -45,7 +45,9 @@ class UserController {
       res.clearCookie("refreshToken");
 
       return res.status(200).json(token);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async activate(req, res) {
@@ -82,7 +84,9 @@ class UserController {
     try {
       const users = await userService.getUsers();
       return res.json(users);
-    } catch (error) {}
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
   }
 }
 

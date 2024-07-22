@@ -8,8 +8,7 @@ const usersApi = {
     try {
       return await axiosIstance.get<IUser[]>("/users");
     } catch (err) {
-      console.error(err.message);
-      return Promise.resolve({} as Promise<AxiosResponse<IUser[]>>);
+      throw err;
     }
   },
 };

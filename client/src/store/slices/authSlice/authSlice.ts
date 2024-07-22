@@ -47,7 +47,7 @@ const authSlice = createSlice({
       state.isLoading = false;
     });
 
-    builder.addCase(registration.rejected, (state, action) => {
+    builder.addCase(registration.rejected, (state) => {
       state.isLoading = false;
     });
 
@@ -55,6 +55,8 @@ const authSlice = createSlice({
       state.isAuth = false;
       state.user = {} as IUser;
     });
+
+    builder.addCase(checkAuth.pending, (state) => {});
 
     builder.addCase(checkAuth.fulfilled, (state, action) => {
       state.isAuth = true;
