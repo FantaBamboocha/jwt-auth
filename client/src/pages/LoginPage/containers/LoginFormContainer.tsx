@@ -8,9 +8,9 @@ import LoginFormView from "@pages/LoginPage/components/LoginFormView";
 import {
   isAuthSelector,
   isLoadingSelector,
-} from "@store/slices/authSlice/selectors";
-import { useAppDispatch } from "@store/store";
-import login from "@store/thunk/login";
+  useAppDispatch,
+  login,
+} from "@store/index";
 
 const LoginFormContainer = () => {
   const dispatch = useAppDispatch();

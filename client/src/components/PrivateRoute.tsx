@@ -1,14 +1,8 @@
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FC, ReactNode, useEffect } from "react";
-import { Box, CircularProgress } from "@mui/material";
 
-import {
-  isAuthSelector,
-  isLoadingSelector,
-} from "@store/slices/authSlice/selectors";
-import { useAppDispatch } from "@store/store";
-import checkAuth from "@store/thunk/checkAuth";
+import { isAuthSelector, useAppDispatch, checkAuth } from "@store/index";
 
 const PrivateRoute: FC<{ children: ReactNode }> = ({ children }) => {
   const isAuth = useSelector(isAuthSelector);

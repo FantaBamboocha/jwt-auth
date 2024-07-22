@@ -1,10 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { IUser } from "#types/responses/IUser";
-import login from "@store/thunk/login";
-import registration from "@store/thunk/registration";
-import logout from "@store/thunk/logout";
-import checkAuth from "@store/thunk/checkAuth";
+import { login, registration, logout, checkAuth } from "@store/index";
 
 export interface IAuthState {
   user: IUser;
@@ -55,8 +52,6 @@ const authSlice = createSlice({
       state.isAuth = false;
       state.user = {} as IUser;
     });
-
-    builder.addCase(checkAuth.pending, (state) => {});
 
     builder.addCase(checkAuth.fulfilled, (state, action) => {
       state.isAuth = true;

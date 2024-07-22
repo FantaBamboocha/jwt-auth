@@ -2,9 +2,7 @@ import { useFormik } from "formik";
 import { useSelector } from "react-redux";
 
 import { registrationValidationSchema } from "@utils/validationSchema";
-import { useAppDispatch } from "@store/store";
-import registration from "@store/thunk/registration";
-import { isLoadingSelector } from "@store/slices/authSlice/selectors";
+import { useAppDispatch, registration, isLoadingSelector } from "@store/index";
 import RegistrationFormView from "../components/RegistrationFormView";
 
 const RegistrationFormContainer = () => {

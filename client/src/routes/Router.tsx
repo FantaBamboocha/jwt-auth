@@ -2,9 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { routeNames } from "./routeNames";
 import PrivateRoute from "@components/PrivateRoute";
-import LoginFormContainer from "@pages/LoginPage/containers/LoginFormContainer";
-import HomePage from "@pages/HomePage/HomePage";
-import RegistrationFormContainer from "@pages/RegistrationPage/containers/RegistrationFormContainer";
+import { HomePage, LoginPage, RegistrationPage } from "@pages/index";
 
 const Router = () => {
   return (
@@ -18,11 +16,8 @@ const Router = () => {
             </PrivateRoute>
           }
         />
-        <Route path={routeNames.LOGIN} element={<LoginFormContainer />} />
-        <Route
-          path={routeNames.REGISTRATION}
-          element={<RegistrationFormContainer />}
-        />
+        <Route path={routeNames.LOGIN} element={<LoginPage />} />
+        <Route path={routeNames.REGISTRATION} element={<RegistrationPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -2,9 +2,11 @@ import { FC } from "react";
 import { useSelector } from "react-redux";
 import { Alert, Snackbar } from "@mui/material";
 
-import { useAppDispatch } from "@store/store";
-import { notificationSelector } from "@store/slices/notificationSlice/selectors";
-import { closeNotification } from "@store/slices/notificationSlice/notificationSlice";
+import {
+  useAppDispatch,
+  notificationSelector,
+  closeNotification,
+} from "@store/index";
 
 const Notification: FC = () => {
   const dispatch = useAppDispatch();

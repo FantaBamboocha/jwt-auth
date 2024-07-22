@@ -1,10 +1,6 @@
 import { Middleware } from "@reduxjs/toolkit";
 
-import { openNotification } from "@store/slices/notificationSlice/notificationSlice";
-import checkAuth from "@store/thunk/checkAuth";
-import login from "@store/thunk/login";
-import logout from "@store/thunk/logout";
-import registration from "@store/thunk/registration";
+import { login, logout, registration, openNotification } from "@store/index";
 
 const notificationMiddleware: Middleware = (store) => (next) => (action) => {
   if (registration.fulfilled.match(action)) {

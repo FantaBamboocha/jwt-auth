@@ -1,8 +1,6 @@
 import { Middleware } from "@reduxjs/toolkit";
-import checkAuth from "@store/thunk/checkAuth";
 
-import login from "@store/thunk/login";
-import logout from "@store/thunk/logout";
+import { login, logout, checkAuth } from "@store/index";
 
 const localStorageMiddleware: Middleware = (store) => (next) => (action) => {
   if (login.fulfilled.match(action) || checkAuth.fulfilled.match(action)) {

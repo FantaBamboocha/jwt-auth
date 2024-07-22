@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 
-import authReducer from "@store/slices/authSlice/authSlice";
-import notificationReducer from "@store/slices/notificationSlice/notificationSlice";
+import authReducer from "@store/slices/authSlice/slice";
+import notificationReducer from "@store/slices/notificationSlice/slice";
 import localStorageMiddleware from "./middleware/localStorageMiddleware";
 import notificationMiddleware from "./middleware/notificationMiddleware";
 

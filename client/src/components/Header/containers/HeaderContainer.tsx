@@ -2,10 +2,8 @@ import { userSelector } from "@store/slices/authSlice/selectors";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-import HeaderView from "../components/HeaderView";
-import { useAppDispatch } from "@store/store";
-import logout from "@store/thunk/logout";
-import CustomDialog from "@components/CustomDialog";
+import { HeaderView, CustomDialog } from "@components/index";
+import { useAppDispatch, logout } from "@store/index";
 
 const HeaderContainer = () => {
   const dispatch = useAppDispatch();

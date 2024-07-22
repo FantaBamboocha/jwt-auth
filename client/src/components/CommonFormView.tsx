@@ -1,9 +1,11 @@
 import { Box, Paper, Typography } from "@mui/material";
 import { FC } from "react";
 
-import TextFieldWrapper from "./TextFieldWrapper";
-import SubmitButton from "./SubmitButton";
-import LinkBlockContainer from "./LinkBlock/containers/LinkBlockContainer";
+import {
+  TextFieldWrapper,
+  SubmitButton,
+  LinkBlockContainer,
+} from "@components/index";
 import { ICommonFormProps } from "#types/formikTypes/commonFormProps";
 
 const CommonFormView: FC<ICommonFormProps> = ({
