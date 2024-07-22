@@ -14,29 +14,38 @@ const CommonFormView: FC<ICommonFormProps> = ({
   isLoading,
 }) => {
   return (
-    <Box>
-      <Paper
-        component="form"
-        onSubmit={formik.handleSubmit}
-        sx={{ p: 4, mb: 3 }}
-      >
-        <Box mb={2} sx={{ textAlign: "center" }}>
-          <Typography variant="h5">{title}</Typography>
-        </Box>
+    <Box
+      sx={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Box>
+        <Paper
+          component="form"
+          onSubmit={formik.handleSubmit}
+          sx={{ p: 4, mb: 3 }}
+        >
+          <Box mb={2} sx={{ textAlign: "center" }}>
+            <Typography variant="h5">{title}</Typography>
+          </Box>
 
-        {fields.map(({ name, type, label }) => (
-          <TextFieldWrapper
-            key={label}
-            name={name}
-            type={type}
-            label={label}
-            formik={formik}
-          />
-        ))}
+          {fields.map(({ name, type, label }) => (
+            <TextFieldWrapper
+              key={label}
+              name={name}
+              type={type}
+              label={label}
+              formik={formik}
+            />
+          ))}
 
-        <SubmitButton isLoading={isLoading} text={submitButtonText} />
-      </Paper>
-      <LinkBlockContainer />
+          <SubmitButton isLoading={isLoading} text={submitButtonText} />
+        </Paper>
+        <LinkBlockContainer />
+      </Box>
     </Box>
   );
 };

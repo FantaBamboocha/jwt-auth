@@ -2,6 +2,7 @@ import { Middleware } from "@reduxjs/toolkit";
 
 import { openNotification } from "@store/slices/notificationSlice/notificationSlice";
 import login from "@store/thunk/login";
+import logout from "@store/thunk/logout";
 import registration from "@store/thunk/registration";
 
 const notificationMiddleware: Middleware = (store) => (next) => (action) => {
@@ -13,18 +14,9 @@ const notificationMiddleware: Middleware = (store) => (next) => (action) => {
         severity: "success",
       })
     );
-  } else if (registration.rejected.match(action)) {
-    store.dispatch(
-      openNotification({
-        message: action.payload,
-        severity: "error",
-      })
-    );
-  } else if (login.fulfilled.match(action)) {
-    store.dispatch(
-      openNotification({ message: "Login successful!", severity: "success" })
-    );
-  } else if (login.rejected.match(action)) {
+  }
+
+  if (registration.rejected.match(action)) {
     store.dispatch(
       openNotification({
         message: action.payload,
@@ -33,6 +25,35 @@ const notificationMiddleware: Middleware = (store) => (next) => (action) => {
     );
   }
 
+  if (login.fulfilled.match(action)) {
+    store.dispatch(
+      openNotification({ message: "Login successful!", severity: "success" })
+    );
+  }
+
+  if (login.rejected.match(action)) {
+    store.dispatch(
+      openNotification({
+        message: action.payload,
+        severity: "error",
+      })
+    );
+  }
+
+  if (logout.fulfilled.match(action)) {
+    store.dispatch(
+      openNotification({ message: "Logout successful!", severity: "success" })
+    );
+  }
+
+  if (logout.rejected.match(action)) {
+    store.dispatch(
+      openNotification({
+        message: "Logout failed!",
+        severity: "error",
+      })
+    );
+  }
   return next(action);
 };
 

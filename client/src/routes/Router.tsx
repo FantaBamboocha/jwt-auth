@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { routeNames } from "./routeNames";
-import LoginFormContainer from "@components/LoginForm/containers/LoginFormContainer";
 import PrivateRoute from "@components/PrivateRoute";
+import LoginFormContainer from "@pages/LoginPage/containers/LoginFormContainer";
 import HomePage from "@pages/HomePage/HomePage";
-import RegistrationFormContainer from "@components/RegistrationForm/containers/RegistrationFormContainer";
+import RegistrationFormContainer from "@pages/RegistrationPage/containers/RegistrationFormContainer";
 
 const Router = () => {
   return (

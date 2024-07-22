@@ -1,10 +1,7 @@
-import { useEffect } from "react";
-
-import { useAppDispatch } from "@store/store";
-import checkAuth from "@store/thunk/checkAuth";
+import HeaderContainer from "@components/Header/containers/HeaderContainer";
 
 const HomePage = () => {
-  return <div>hello</div>;
+  return <HeaderContainer />;
 };
 
 export default HomePage;

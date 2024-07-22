@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { loginValidationSchema } from "@utils/validationSchema";
-import LoginFormView from "@components/LoginForm/components/LoginFormView";
+import LoginFormView from "@pages/LoginPage/components/LoginFormView";
 import {
   isAuthSelector,
   isLoadingSelector,
