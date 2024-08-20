@@ -1,9 +1,8 @@
-import { userSelector } from "@store/slices/authSlice/selectors";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import { HeaderView, CustomDialog } from "@components/index";
-import { useAppDispatch, logout } from "@store/index";
+import { useAppDispatch, logout, userSelector } from "@store/index";
 
 const HeaderContainer = () => {
   const dispatch = useAppDispatch();
@@ -49,7 +48,7 @@ const HeaderContainer = () => {
         onConfirm={confirmLogout}
         onCancel={cancelLogout}
       >
-        <p>Are you sure you want to logout?</p>
+        Are you sure you want to logout?
       </CustomDialog>
     </>
   );

@@ -28,6 +28,7 @@ const HeaderView: FC<IHeaderViewProps> = ({
         <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
           <Box
             component="img"
+            alt="logo"
             src="https://seeklogo.com/images/J/jwt-logo-11B708E375-seeklogo.com.png"
             sx={{ height: 40, mr: 2 }}
           />
