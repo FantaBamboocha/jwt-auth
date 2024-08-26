@@ -1,6 +1,9 @@
 node_modules
+coverage
 .env
 
 # Ignore SSL key and certificate
 localhost+1-key.pem
 localhost+1.pem
+
+posts.json

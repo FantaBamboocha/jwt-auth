@@ -4,22 +4,29 @@ const authMiddleware = (req, res, next) => {
   const authorizationHeader = req.headers.authorization;
 
   if (!authorizationHeader) {
-    return res.sendStatus(401).json({ message: "Unauthorized" });
+    return res.status(401).json({ message: "Authorization header is missing" });
   }
 
-  const accessToken = authorizationHeader.split(" ")[1];
-
-  if (!accessToken) {
-    return res.sendStatus(401).json({ message: "Unauthorized" });
+  const [scheme, token] = authorizationHeader.split(" ");
+  if (scheme !== "Bearer" || !token) {
+    return res
+      .status(401)
+      .json({ message: "Invalid Authorization header format" });
   }
 
-  const userData = tokenService.validateAccessToken(accessToken);
+  try {
+    const userData = tokenService.validateAccessToken(token);
 
-  if (!userData) {
-    return res.sendStatus(401).json({ message: "Unauthorized" });
+    if (!userData) {
+      return res.status(401).json({ message: "Invalid token" });
+    }
+
+    // req.user = userData;
+
+    next();
+  } catch (error) {
+    return res.status(500).json({ message: "Internal Server Error" });
   }
-
-  next();
 };
 
 export default authMiddleware;
